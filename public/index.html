@@ -7,19 +7,33 @@
   <body>
     <div id="root">
     </div>
-
+    <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
     <script type="module">
-      // using Dom API  add html element
-      // create element
-      const rootElement  = document.getElementById('root');
-      const element = document.createElement('div');
-      //set attributes
-      element.className = 'container';
-      // set some content.
-      element.textContent = 'HaHaHaHaaaaaaaaaaaaaaaaaaaaaaaaaa Keep Smiling';
-      // Now we need to append this h1 node to root node.
-      //get root and append
-      rootElement.append(element);
+      // // using Dom API  add html element
+      // // create element
+      // const rootElement  = document.getElementById('root');
+      // const element = document.createElement('div');
+      // //set attributes
+      // element.className = 'container';
+      // // set some content.
+      // element.textContent = 'HaHaHaHaaaaaaaaaaaaaaaaaaaaaaaaaa Keep Smiling';
+      // // Now we need to append this h1 node to root node.
+      // //get root and append
+      // rootElement.append(element);
+
+
+      //React framework abstracts away the imperative browser API from you to give you a much more declarative API to work with.
+            // u need two file
+            // 1.React : responsible for creating React elements (kinda like document.createElement())
+            // 2.ReactDOM : responsible for rendering React elements to the DOM (kinda like rootElement.append())...what to render where to render
+      const element = React.createElement('div', {
+        className: 'container',
+        children: 'Hello World',
+      })
+
+      ReactDOM.render(element, document.getElementById('root'))
+
     </script>
   </body>
 </html>
