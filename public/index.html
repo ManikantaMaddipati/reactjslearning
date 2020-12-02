@@ -43,6 +43,14 @@
 
       ReactDOM.render(element, document.getElementById('root'))
 
+      // spread operator : take properties from one object and append the properties to another object.
+      const child = 'HelloWorld';
+      const className = 'container';
+
+      const props = {child,className}
+
+      console.log({id :'Manikanta', ...props});
+
     </script>
   </body>
 </html>
