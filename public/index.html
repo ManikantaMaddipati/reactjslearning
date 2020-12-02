@@ -37,20 +37,24 @@
       // so React provides HTML syntactic sugar on top of the raw React APIs: JSX
       // JSX is not javascript so u need compiler to convert JSX to javascript : Babel
 
-      const element =  <div className="container">
-                         Hello World
-                         </div>
-
-      ReactDOM.render(element, document.getElementById('root'))
+      // const element =  <div className="container">
+      //                    Hello World
+      //                    </div>
+      //
+      // ReactDOM.render(element, document.getElementById('root'))
 
       // spread operator : take properties from one object and append the properties to another object.
-      const child = 'HelloWorld';
+      const children = 'MAVASCRIPT IS GREAT';
       const className = 'container';
 
-      const props = {child,className}
+      const props = {children,className}
 
       console.log({id :'Manikanta', ...props});
 
+      const element = <div {...props}/>
+
+      ReactDOM.render(element, document.getElementById('root'));
+      
     </script>
   </body>
 </html>
