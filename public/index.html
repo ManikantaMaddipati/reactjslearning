@@ -78,13 +78,24 @@
 
         return element
       }
+      //
+      //
+      // const classname = "mani"
+      // const content = "Hello Mani"
+      // const kv = {classname,content}
+      // const element = jsxRepation(kv)
+      // console.log(element);
+      // ReactDOM.render(element, document.getElementById('root'));
 
 
-      const classname = "mani"
-      const content = "Hello Mani"
-      const kv = {classname,content}
-      ReactDOM.render(jsxRepation(kv), document.getElementById('root'));
-      
+      //creating costume components
+      //So far we've only used React.createElement(someString), but the first argument to
+      // react.createElement can also be a "function" which returns something that's renderable.
+
+     const helloElement = React.createElement(jsxRepation,{classname:'manikanta',content:'helloworld'});
+     console.log(helloElement); // The typr prop in react.element is a function jsxRepation reference.
+     ReactDOM.render(helloElement, document.getElementById('root')); // during render this element , the jsxRepation function is called with props : classname:'manikanta',content:'helloworld'
+
     </script>
   </body>
 </html>
