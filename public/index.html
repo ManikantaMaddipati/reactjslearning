@@ -44,16 +44,46 @@
       // ReactDOM.render(element, document.getElementById('root'))
 
       // spread operator : take properties from one object and append the properties to another object.
-      const children = 'MAVASCRIPT IS GREAT';
-      const className = 'container';
+      // const children = 'MAVASCRIPT IS GREAT';
+      // const className = 'container';
+      //
+      // const props = {children,className}
+      //
+      // console.log({id :'Manikanta', ...props});
+      //
+      // const element = <div {...props}/>
+      //
+      // ReactDOM.render(element, document.getElementById('root'));
 
-      const props = {children,className}
+      // function: small piece of shared code that is called repeatedly to return something or to achieve a goal
 
-      console.log({id :'Manikanta', ...props});
+      // We can share JSX
 
-      const element = <div {...props}/>
+      // "components" are function that returns something that is renderable.
 
-      ReactDOM.render(element, document.getElementById('root'));
+      // const element  = <div className="container">
+      //                       <div className="message">HelloWorld</div>
+      //                       <div className="message">Manikanta</div>
+      //                  </div>
+      //
+      // ReactDOM.render(element, document.getElementById('root'));
+
+      // we see that above code there is repeation of code for div element with classname message.
+
+      function jsxRepation(prop) {
+
+        const element  = <div className="container">
+          <div className={prop.classname}>{prop.content}</div>
+        </div>
+
+        return element
+      }
+
+
+      const classname = "mani"
+      const content = "Hello Mani"
+      const kv = {classname,content}
+      ReactDOM.render(jsxRepation(kv), document.getElementById('root'));
       
     </script>
   </body>
