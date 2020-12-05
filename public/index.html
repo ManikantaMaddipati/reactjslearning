@@ -70,14 +70,7 @@
 
       // we see that above code there is repeation of code for div element with classname message.
 
-      function jsxRepation(prop) {
 
-        const element  = <div className="container">
-          <div className={prop.classname}>{prop.content}</div>
-        </div>
-
-        return element
-      }
       //
       //
       // const classname = "mani"
@@ -92,9 +85,27 @@
       //So far we've only used React.createElement(someString), but the first argument to
       // react.createElement can also be a "function" which returns something that's renderable.
 
-     const helloElement = React.createElement(jsxRepation,{classname:'manikanta',content:'helloworld'});
-     console.log(helloElement); // The typr prop in react.element is a function jsxRepation reference.
-     ReactDOM.render(helloElement, document.getElementById('root')); // during render this element , the jsxRepation function is called with props : classname:'manikanta',content:'helloworld'
+     //const helloElement = React.createElement(jsxRepation,{classname:'manikanta',content:'helloworld'});
+
+      // how to convert above line to JSX
+
+      //https://stackoverflow.com/questions/65153346/react-custom-component-not-getting-rendered/65153517#65153517
+
+      //By adding capital letter with angel for element type the babel  will compile it to  reference to variable in scope
+      function CComponent(prop) {
+
+        const element  = <div className="container">
+                           <div className={prop.classname}>{prop.content}</div>
+                        </div>
+
+        return element
+
+      }
+
+     const helloElement =  <CComponent classname='xyz' content='helloWorld'> </CComponent>
+
+     console.log(helloElement);
+     ReactDOM.render(helloElement, document.getElementById('root'));
 
     </script>
   </body>
