@@ -92,20 +92,79 @@
       //https://stackoverflow.com/questions/65153346/react-custom-component-not-getting-rendered/65153517#65153517
 
       //By adding capital letter with angel for element type the babel  will compile it to  reference to variable in scope
-      function CComponent(prop) {
+     //  function CComponent(prop) {
+     //
+     //    const element  = <div className="container">
+     //                       <div className={prop.classname}>{prop.content}</div>
+     //                    </div>
+     //
+     //    return element
+     //
+     //  }
+     //
+     // const helloElement =  <CComponent classname='xyz' content='helloWorld'> </CComponent>
+     //
+     // console.log(helloElement);
+     // ReactDOM.render(helloElement, document.getElementById('root'));
 
-        const element  = <div className="container">
-                           <div className={prop.classname}>{prop.content}</div>
-                        </div>
+      //Styling React Components:
+      //                      1. inline Style using style prop
+      //                      2. Regularly CSS using className
 
-        return element
+        // const element  = <div className="container">
+        //                    <div className={prop.classname}>{prop.content}</div>
+        //                 </div>
+        //
+        // return elemen
 
+     // const helloElement =  <CComponent classname='xyz' content='helloWorld'> </CComponent>
+     //
+     // console.log(helloElement);
+     // ReactDOM.render(helloElement, document.getElementById('root'));
+
+     //What Happens when users are not using your components correctly.
+     // we can validate the props and throw error to the users
+     function Message(prop) {
+        const ele = <div className="message">
+                          {prop.animal}, {prop.sound}
+                   </div>
+
+         return ele;
       }
 
-     const helloElement =  <CComponent classname='xyz' content='helloWorld'> </CComponent>
+      //Before rendering component react will look for 'object' called propTypes who's keys are props to validate.
+      Message.propTypes = {
+       animal(props,propName,componentName) {
+         const type = typeof props[propName];
+         if (type !== 'string' ) {
+            return new Error(`Hey the compotypenent ${componentName} needs the prop ${propName} to be a type of "string but was passed a ${type}` )
+          }
+       },
+        sound(props,propName,componentName) {
+          const type = typeof props[propName];
+          if (type !== 'string' ) {
+            return new Error(`Hey the component ${componentName} needs the prop ${propName} to be a type of "string but was passed a ${type}` )
+          }
+        }
+      }
 
-     console.log(helloElement);
-     ReactDOM.render(helloElement, document.getElementById('root'));
+
+
+      const element =  <div className="animal">
+                         <Message animal="cow" sound="mow"> </Message>
+                         <Message animal="cat" sound="meow"> </Message>
+
+                         // custom error is throw in console
+                         <Message animal={5} sound="mow"> </Message>
+
+                         // custom error is throw in console
+                         <Message animal="cat" sound={5}> </Message>
+                       </div>
+
+      ReactDOM.render(element, document.getElementById('root'));
+
+
+
 
     </script>
   </body>
