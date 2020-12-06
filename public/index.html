@@ -10,6 +10,7 @@
     <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
     <script type="text/babel">
       // // using Dom API  add html element
       // // create element
@@ -150,17 +151,18 @@
       }
 
 
+      //React Fragments : Avoid another box.
 
-      const element =  <div className="animal">
+      const element =  <>
                          <Message animal="cow" sound="mow"> </Message>
                          <Message animal="cat" sound="meow"> </Message>
 
-                         // custom error is throw in console
+
                          <Message animal={5} sound="mow"> </Message>
 
-                         // custom error is throw in console
+
                          <Message animal="cat" sound={5}> </Message>
-                       </div>
+                       </>
 
       ReactDOM.render(element, document.getElementById('root'));
 
