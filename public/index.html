@@ -133,6 +133,7 @@
       }
 
       //Before rendering component react will look for 'object' called propTypes who's keys are props to validate.
+      //Note: That this propType will effect the performances hence many plugins will remove this in prod.
       Message.propTypes = {
        animal(props,propName,componentName) {
          const type = typeof props[propName];
