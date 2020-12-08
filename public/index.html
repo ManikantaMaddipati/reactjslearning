@@ -12,161 +12,35 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
     <script type="text/babel">
-      // // using Dom API  add html element
-      // // create element
-      // const rootElement  = document.getElementById('root');
-      // const element = document.createElement('div');
-      // //set attributes
-      // element.className = 'container';
-      // // set some content.
-      // element.textContent = 'HaHaHaHaaaaaaaaaaaaaaaaaaaaaaaaaa Keep Smiling';
-      // // Now we need to append this h1 node to root node.
-      // //get root and append
-      // rootElement.append(element);
 
 
-      //React framework abstracts away the imperative browser API from you to give you a much more declarative API to work with.
-            // u need two file
-            // 1.React : responsible for creating React elements (kinda like document.createElement())
-            // 2.ReactDOM : responsible for rendering React elements to the DOM (kinda like rootElement.append())...what to render where to render
-      // const element = React.createElement('div', {
-      //   className: 'container',
-      //   children: 'Hello World',
-      // })
-
-      // The above code is painful to read and write...
-      // so React provides HTML syntactic sugar on top of the raw React APIs: JSX
-      // JSX is not javascript so u need compiler to convert JSX to javascript : Babel
-
-      // const element =  <div className="container">
-      //                    Hello World
-      //                    </div>
-      //
-      // ReactDOM.render(element, document.getElementById('root'))
-
-      // spread operator : take properties from one object and append the properties to another object.
-      // const children = 'MAVASCRIPT IS GREAT';
-      // const className = 'container';
-      //
-      // const props = {children,className}
-      //
-      // console.log({id :'Manikanta', ...props});
-      //
-      // const element = <div {...props}/>
-      //
-      // ReactDOM.render(element, document.getElementById('root'));
-
-      // function: small piece of shared code that is called repeatedly to return something or to achieve a goal
-
-      // We can share JSX
-
-      // "components" are function that returns something that is renderable.
-
-      // const element  = <div className="container">
-      //                       <div className="message">HelloWorld</div>
-      //                       <div className="message">Manikanta</div>
-      //                  </div>
-      //
-      // ReactDOM.render(element, document.getElementById('root'));
-
-      // we see that above code there is repeation of code for div element with classname message.
 
 
-      //
-      //
-      // const classname = "mani"
-      // const content = "Hello Mani"
-      // const kv = {classname,content}
-      // const element = jsxRepation(kv)
-      // console.log(element);
-      // ReactDOM.render(element, document.getElementById('root'));
+   function Greeting() {
 
+     const [name,setName] = React.useState('');
+     function handleChange(event) {
+       setName(event.target.value)
+       console.log(name);
+     }
+     return(
+              <div>
+                <form>
+                       <label htmlFor="name">Name=</label>
+                       <input onChange={handleChange} id="name"/>
+                </form>
+                   {name ? <strong> Hello {name} </strong>  : 'plz type your name'}
+              </div>
+      )
+    }
 
-      //creating costume components
-      //So far we've only used React.createElement(someString), but the first argument to
-      // react.createElement can also be a "function" which returns something that's renderable.
+    const ele = <>
+                <Greeting>
 
-     //const helloElement = React.createElement(jsxRepation,{classname:'manikanta',content:'helloworld'});
+                </Greeting>
+                </>
 
-      // how to convert above line to JSX
-
-      //https://stackoverflow.com/questions/65153346/react-custom-component-not-getting-rendered/65153517#65153517
-
-      //By adding capital letter with angel for element type the babel  will compile it to  reference to variable in scope
-     //  function CComponent(prop) {
-     //
-     //    const element  = <div className="container">
-     //                       <div className={prop.classname}>{prop.content}</div>
-     //                    </div>
-     //
-     //    return element
-     //
-     //  }
-     //
-     // const helloElement =  <CComponent classname='xyz' content='helloWorld'> </CComponent>
-     //
-     // console.log(helloElement);
-     // ReactDOM.render(helloElement, document.getElementById('root'));
-
-      //Styling React Components:
-      //                      1. inline Style using style prop
-      //                      2. Regularly CSS using className
-
-        // const element  = <div className="container">
-        //                    <div className={prop.classname}>{prop.content}</div>
-        //                 </div>
-        //
-        // return elemen
-
-     // const helloElement =  <CComponent classname='xyz' content='helloWorld'> </CComponent>
-     //
-     // console.log(helloElement);
-     // ReactDOM.render(helloElement, document.getElementById('root'));
-
-     //What Happens when users are not using your components correctly.
-     // we can validate the props and throw error to the users
-     function Message(prop) {
-        const ele = <div className="message">
-                          {prop.animal}, {prop.sound}
-                   </div>
-
-         return ele;
-      }
-
-      //Before rendering component react will look for 'object' called propTypes who's keys are props to validate.
-      //Note: That this propType will effect the performances hence many plugins will remove this in prod.
-      Message.propTypes = {
-       animal(props,propName,componentName) {
-         const type = typeof props[propName];
-         if (type !== 'string' ) {
-            return new Error(`Hey the compotypenent ${componentName} needs the prop ${propName} to be a type of "string but was passed a ${type}` )
-          }
-       },
-        sound(props,propName,componentName) {
-          const type = typeof props[propName];
-          if (type !== 'string' ) {
-            return new Error(`Hey the component ${componentName} needs the prop ${propName} to be a type of "string but was passed a ${type}` )
-          }
-        }
-      }
-
-
-      //React Fragments : Avoid another box.
-
-      const element =  <>
-                         <Message animal="cow" sound="mow"> </Message>
-                         <Message animal="cat" sound="meow"> </Message>
-
-
-                         <Message animal={5} sound="mow"> </Message>
-
-
-                         <Message animal="cat" sound={5}> </Message>
-                       </>
-
-      ReactDOM.render(element, document.getElementById('root'));
-
-
+    ReactDOM.render(ele, document.getElementById('root'))
 
 
     </script>
