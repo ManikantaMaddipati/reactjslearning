@@ -16,18 +16,25 @@
 
 
 
-   function Greeting() {
+   function Greeting({initialvalue = ''}) {
 
-     const [name,setName] = React.useState('');
+     const [name,setName] = React.useState( window.localStorage.getItem('name') || initialvalue);
      function handleChange(event) {
        setName(event.target.value)
        console.log(name);
      }
+
+     // when ever the component renders we call the callback function given to useEffect hook
+     React.useEffect(()=>{
+       //This callback function assigns name in the localStorage
+       window.localStorage.setItem('name',name);
+     })
+
      return(
               <div>
                 <form>
                        <label htmlFor="name">Name=</label>
-                       <input onChange={handleChange} id="name"/>
+                       <input value={name} onChange={handleChange} id="name"/>
                 </form>
                    {name ? <strong> Hello {name} </strong>  : 'plz type your name'}
               </div>
