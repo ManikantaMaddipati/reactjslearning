@@ -34,10 +34,14 @@
      }
 
      // when ever the component renders we call the callback function given to useEffect hook
+     // useEffect has second parameter called array of parameter of deciding when to execute the callback function
+     //       - By default when component renders
+     //       - [] -> Only once
+     //       - [parma] -> react will check  if parm has changed if yes , execute the callback
      React.useEffect(()=>{
        //This callback function assigns name in the localStorage
        window.localStorage.setItem('name',name);
-     })
+     },[name])
 
      return(
               <div>
