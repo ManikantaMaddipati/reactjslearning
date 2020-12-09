@@ -18,7 +18,16 @@
 
    function Greeting({initialvalue = ''}) {
 
-     const [name,setName] = React.useState( window.localStorage.getItem('name') || initialvalue);
+     console.log("rendering the component")
+
+     function getInitValue(){
+       console.log("getting init value")
+      return  window.localStorage.getItem('name') || initialvalue
+     }
+
+     //useState : lazy state initialization (use this is the operation is expensive)
+     //for useState function if we pass function instead of value..That function will only be called once.
+     const [name,setName] = React.useState(getInitValue);
      function handleChange(event) {
        setName(event.target.value)
        console.log(name);
