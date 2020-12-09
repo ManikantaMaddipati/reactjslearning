@@ -14,34 +14,27 @@
     <script type="text/babel">
 
 
+      //customHook : just a function which as hook's inside it
+   function useInitialState(key,initialValue = '') {
+     const [state,setState] = React.useState(window.localStorage.getItem(key) || initialValue);
 
-
-   function Greeting({initialvalue = ''}) {
-
-     console.log("rendering the component")
-
-     function getInitValue(){
-       console.log("getting init value")
-      return  window.localStorage.getItem('name') || initialvalue
-     }
-
-     //useState : lazy state initialization (use this is the operation is expensive)
-     //for useState function if we pass function instead of value..That function will only be called once.
-     const [name,setName] = React.useState(getInitValue);
-     function handleChange(event) {
-       setName(event.target.value)
-       console.log(name);
-     }
-
-     // when ever the component renders we call the callback function given to useEffect hook
-     // useEffect has second parameter called array of parameter of deciding when to execute the callback function
-     //       - By default when component renders
-     //       - [] -> Only once
-     //       - [parma] -> react will check  if parm has changed if yes , execute the callback
      React.useEffect(()=>{
        //This callback function assigns name in the localStorage
-       window.localStorage.setItem('name',name);
-     },[name])
+       window.localStorage.setItem(key,state);
+     },[key,state])
+
+     return [state, setState]
+   }
+
+
+   function Greeting({initialValue = ''}) {
+
+     const [name,setName] = useInitialState('name',initialValue);
+
+     function handleChange(event) {
+       setName(event.target.value)
+     }
+
 
      return(
               <div>
