@@ -12,25 +12,35 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
     <script type="text/babel">
-    function App() {
 
-      // UseRef Hook : To get access to the DOM, you need to ask React to give you access to a particular DOM node when it renders your component
-      const inputRef = React.useRef(null);
+      // UseReducer(Redux): React's useState hook can get you a really long way with React state management.
+      // That said, sometimes you want to separate the state logic from the components that make the state changes.
+      // In addition, if you have multiple elements of state that typically change together,
+      // then having an object that contains those elements of state can be quite helpful.
 
-      function addTodo(event){
-        event.preventDefault();
-        inputRef.current.style.backgroundColor = "red";
+      // One important thing to note here is that the reducer (called nameReducer above) is called with two arguments:
+      //
+      // 1.the current state
+      // 2.whatever it is that the dispatch function (called setName above) is called with. This is often called an "action."
+      function nameReducer(previousName, newName) {
+        return newName
       }
 
-      return (
-              <form>
-                <input ref={inputRef} type="text" name="name" />
-                 <button onClick={addTodo}>Submit</button>
-              </form>
-      )
-    }
+      const initialNameValue = 'Joe'
 
-      ReactDOM.render(<App/>,document.getElementById('root'))
+      function NameInput() {
+        const [name, setName] = React.useReducer(nameReducer, initialNameValue)
+        const handleChange = event => setName(event.target.value)
+        return (
+                <>
+                  <label>
+                    Name: <input defaultValue={name} onChange={handleChange} />
+                  </label>
+                  <div>You typed: {name}</div>
+                </>
+        )
+      }
+      ReactDOM.render(<NameInput/>,document.getElementById('root'))
 
     </script>
   </body>
