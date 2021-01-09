@@ -22,25 +22,40 @@
       //
       // 1.the current state
       // 2.whatever it is that the dispatch function (called setName above) is called with. This is often called an "action."
-      function nameReducer(previousName, newName) {
-        return newName
-      }
 
-      const initialNameValue = 'Joe'
+      function reducerFunction(currentState,incrementStateAction) {
+          console.log(incrementStateAction)
+        if(incrementStateAction.type == 'incrementing'){
+          return currentState + incrementStateAction.stepValue;
+       } else if (incrementStateAction.type == 'decrementing'){
+        return currentState - incrementStateAction.stepValue;
+        }else {
+          console.log('Action passed is not understood');
+        }
+     }
 
-      function NameInput() {
-        const [name, setName] = React.useReducer(nameReducer, initialNameValue)
-        const handleChange = event => setName(event.target.value)
+      function IncrementDecrementOnClick(){
+        let someObject = {obj1:1,obj2:2}
+        const [init,setInit] = React.useReducer(reducerFunction,someObject);
+
+        function increment() {
+          setInit()
+        }
+
+        function decrement() {
+          setInit({type:'decrementing',stepValue:5})
+        }
+
         return (
-                <>
-                  <label>
-                    Name: <input defaultValue={name} onChange={handleChange} />
-                  </label>
-                  <div>You typed: {name}</div>
-                </>
+                <div>
+                   The count is  : {init}
+                  <button onClick={increment}>+</button>
+                  <button onClick={decrement}>-</button>
+                </div>
         )
+
       }
-      ReactDOM.render(<NameInput/>,document.getElementById('root'))
+      ReactDOM.render(<IncrementDecrementOnClick/>,document.getElementById('root'));
 
     </script>
   </body>
