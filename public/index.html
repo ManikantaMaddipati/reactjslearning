@@ -13,49 +13,21 @@
     <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
     <script type="text/babel">
 
-      // UseReducer(Redux): React's useState hook can get you a really long way with React state management.
-      // That said, sometimes you want to separate the state logic from the components that make the state changes.
-      // In addition, if you have multiple elements of state that typically change together,
-      // then having an object that contains those elements of state can be quite helpful.
+       //useContext -> share state b/w components, helps avoid prop drilling .
+       //insert state into section of tree and extract it anywhere within that tree
 
-      // One important thing to note here is that the reducer (called nameReducer above) is called with two arguments:
-      //
-      // 1.the current state
-      // 2.whatever it is that the dispatch function (called setName above) is called with. This is often called an "action."
+      const FooContext = React.createContext()
 
-      function reducerFunction(currentState,incrementStateAction) {
-          console.log(incrementStateAction)
-        if(incrementStateAction.type == 'incrementing'){
-          return currentState + incrementStateAction.stepValue;
-       } else if (incrementStateAction.type == 'decrementing'){
-        return currentState - incrementStateAction.stepValue;
-        }else {
-          console.log('Action passed is not understood');
-        }
-     }
-
-      function IncrementDecrementOnClick(){
-        let someObject = {obj1:1,obj2:2}
-        const [init,setInit] = React.useReducer(reducerFunction,someObject);
-
-        function increment() {
-          setInit()
-        }
-
-        function decrement() {
-          setInit({type:'decrementing',stepValue:5})
-        }
-
-        return (
-                <div>
-                   The count is  : {init}
-                  <button onClick={increment}>+</button>
-                  <button onClick={decrement}>-</button>
-                </div>
-        )
-
+      function FooComponent() {
+        const bar = React.useContext(FooContext)
+        return <div>Foo is: {bar}</div>
       }
-      ReactDOM.render(<IncrementDecrementOnClick/>,document.getElementById('root'));
+
+        React.render( <FooContext.Provider  value="bar">
+                          <FooComponent/>
+                        </FooContext.Provider >
+                ,document.getElementById('root'))
+
 
     </script>
   </body>
