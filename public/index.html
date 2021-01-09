@@ -13,22 +13,35 @@
     <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
     <script type="text/babel">
 
-       //useContext -> share state b/w components, helps avoid prop drilling .
-       //insert state into section of tree and extract it anywhere within that tree
+       const CountContext = React.createContext()
 
-      const FooContext = React.createContext()
+       function CounterProvider({props}) {
+        const [count,setCount] = React.useState(0)
+        const value = [count,setCount]
+        return <CountContext.Provider value={value} {...props}/>
+       }
 
-      function FooComponent() {
-        const bar = React.useContext(FooContext)
-        return <div>Foo is: {bar}</div>
-      }
+       function CounterDisplay(){
+         const [count] = React.useContext(CountContext)
+         return <div>The current count is {count}</div>
+       }
 
-        React.render( <FooContext.Provider  value="bar">
-                          <FooComponent/>
-                        </FooContext.Provider >
-                ,document.getElementById('root'))
+       function Counter(){
+       const [,setCount] = React.useContext(CountContext)
+       const increment = () => setCount(c=>c+1)
+       return <button onClick={increment}>Increment Count</button>
+       }
 
+       function App(){
+         return <div>
+           <CounterProvider>
+             <CounterDisplay/>
+             <Counter/>
+           </CounterProvider>
+         </div>
+       }
 
+       ReactDOM.render(<App/>, document.getElementById('root'));
     </script>
   </body>
 </html>
